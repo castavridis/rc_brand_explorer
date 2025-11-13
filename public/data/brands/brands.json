@@ -1,0 +1,102 @@
+{
+  "version": "1.0.0",
+  "lastUpdated": "2025-11-13T00:00:00Z",
+  "brands": [
+    {
+      "id": "nike-inc",
+      "name": "Nike",
+      "slug": "nike",
+      "category": "Apparel & Fashion",
+      "logoPath": "assets/logos/nike.svg",
+      "websiteUrl": "https://www.nike.com",
+      "description": "Athletic footwear and apparel company",
+      "tags": ["sports", "footwear", "apparel"],
+      "dateAdded": "2025-11-13T00:00:00Z",
+      "featured": true
+    },
+    {
+      "id": "apple-inc",
+      "name": "Apple",
+      "slug": "apple",
+      "category": "Technology",
+      "logoPath": "assets/logos/apple.svg",
+      "websiteUrl": "https://www.apple.com",
+      "description": "Consumer electronics and software company",
+      "tags": ["technology", "electronics", "software"],
+      "dateAdded": "2025-11-13T00:00:00Z",
+      "featured": true
+    },
+    {
+      "id": "coca-cola",
+      "name": "Coca-Cola",
+      "slug": "coca-cola",
+      "category": "Food & Beverage",
+      "logoPath": "assets/logos/coca-cola.svg",
+      "websiteUrl": "https://www.coca-cola.com",
+      "description": "World's largest beverage company",
+      "tags": ["beverage", "drinks", "soda"],
+      "dateAdded": "2025-11-13T00:00:00Z",
+      "featured": false
+    },
+    {
+      "id": "microsoft",
+      "name": "Microsoft",
+      "slug": "microsoft",
+      "category": "Technology",
+      "logoPath": "assets/logos/microsoft.svg",
+      "websiteUrl": "https://www.microsoft.com",
+      "description": "Software and cloud computing company",
+      "tags": ["technology", "software", "cloud"],
+      "dateAdded": "2025-11-13T00:00:00Z",
+      "featured": false
+    },
+    {
+      "id": "adidas",
+      "name": "Adidas",
+      "slug": "adidas",
+      "category": "Apparel & Fashion",
+      "logoPath": "assets/logos/adidas.svg",
+      "websiteUrl": "https://www.adidas.com",
+      "description": "Athletic footwear and apparel",
+      "tags": ["sports", "footwear", "apparel"],
+      "dateAdded": "2025-11-13T00:00:00Z",
+      "featured": false
+    },
+    {
+      "id": "starbucks",
+      "name": "Starbucks",
+      "slug": "starbucks",
+      "category": "Food & Beverage",
+      "logoPath": "assets/logos/starbucks.svg",
+      "websiteUrl": "https://www.starbucks.com",
+      "description": "Coffeehouse chain",
+      "tags": ["coffee", "beverage", "cafe"],
+      "dateAdded": "2025-11-13T00:00:00Z",
+      "featured": false
+    },
+    {
+      "id": "mcdonalds",
+      "name": "McDonald's",
+      "slug": "mcdonalds",
+      "category": "Food & Beverage",
+      "logoPath": "assets/logos/mcdonalds.svg",
+      "websiteUrl": "https://www.mcdonalds.com",
+      "description": "Fast food restaurant chain",
+      "tags": ["fast food", "restaurant"],
+      "dateAdded": "2025-11-13T00:00:00Z",
+      "featured": false
+    },
+    {
+      "id": "google",
+      "name": "Google",
+      "slug": "google",
+      "category": "Technology",
+      "logoPath": "assets/logos/google.svg",
+      "websiteUrl": "https://www.google.com",
+      "description": "Search engine and technology company",
+      "tags": ["technology", "search", "internet"],
+      "dateAdded": "2025-11-13T00:00:00Z",
+      "featured": true
+    }
+  ]
+}
