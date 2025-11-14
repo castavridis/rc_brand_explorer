@@ -22,10 +22,10 @@
 
 **Purpose**: Project initialization and dependencies
 
-- [ ] T001 Install Node.js dependencies: file-type@19.0.0, csv-parser@3.0.0, commander@11.1.0
-- [ ] T002 [P] Add npm script "import-brands" in package.json pointing to src/scripts/import-brands.ts
-- [ ] T003 [P] Create src/types/importer.ts with ImportInput, CSVRow, LogoFile, ImportResult, ImportReport types
-- [ ] T004 [P] Create src/services/importers/ directory structure
+- [x] T001 Install Node.js dependencies: file-type@19.0.0, csv-parser@3.0.0, commander@11.1.0
+- [x] T002 [P] Add npm script "import-brands" in package.json pointing to src/scripts/import-brands.ts
+- [x] T003 [P] Create src/types/importer.ts with ImportInput, CSVRow, LogoFile, ImportResult, ImportReport types
+- [x] T004 [P] Create src/services/importers/ directory structure
 
 ---
 
@@ -35,10 +35,10 @@
 
 **⚠️ CRITICAL**: No user story work can begin until this phase is complete
 
-- [ ] T005 [P] Create src/utils/fileSystem.ts with file existence/readability check utilities
-- [ ] T006 [P] Extend src/utils/slugify.ts to support brand ID generation from brand name
-- [ ] T007 [P] Create src/utils/categoryInference.ts with basic category inference (defaults to "Other")
-- [ ] T008 Verify existing Brand interface in src/types/brand.ts matches data-model.md requirements
+- [x] T005 [P] Create src/utils/fileSystem.ts with file existence/readability check utilities
+- [x] T006 [P] Extend src/utils/slugify.ts to support brand ID generation from brand name
+- [x] T007 [P] Create src/utils/categoryInference.ts with basic category inference (defaults to "Other")
+- [x] T008 Verify existing Brand interface in src/types/brand.ts matches data-model.md requirements
 
 **Checkpoint**: Foundation ready - user story implementation can now begin in parallel
 
@@ -52,20 +52,20 @@
 
 ### Implementation for User Story 1
 
-- [ ] T009 [P] [US1] Create src/services/importers/csvParser.ts with parseCSV() function
-- [ ] T010 [P] [US1] Implement CSV row validation (logoName and fileName non-empty) in csvParser.ts
-- [ ] T011 [P] [US1] Create src/services/importers/fileValidator.ts with detectFileType() using file-type library
-- [ ] T012 [P] [US1] Implement isSupportedFormat() in fileValidator.ts (PNG, JPEG, GIF only)
-- [ ] T013 [P] [US1] Implement validateFile() in fileValidator.ts returning LogoFile metadata
-- [ ] T014 [US1] Create src/services/importers/brandImporter.ts with transformToBrand() function
-- [ ] T015 [US1] Implement processRow() in brandImporter.ts (CSV row + file validation → Brand or error)
-- [ ] T016 [US1] Implement main importBrands() orchestration function in brandImporter.ts
-- [ ] T017 [US1] Create src/services/importers/reportGenerator.ts with writeBrandsJSON() function
-- [ ] T018 [US1] Implement copyLogoFiles() in reportGenerator.ts to copy valid logos to public/data/brands/logos/
-- [ ] T019 [US1] Create src/scripts/import-brands.ts CLI entry point with commander argument parsing
-- [ ] T020 [US1] Integrate csvParser, fileValidator, brandImporter, reportGenerator in import-brands.ts
-- [ ] T021 [US1] Add console output for import progress (processing X of Y rows)
-- [ ] T022 [US1] Handle critical errors (CSV not found, output directory not writable) with clear error messages
+- [x] T009 [P] [US1] Create src/services/importers/csvParser.ts with parseCSV() function
+- [x] T010 [P] [US1] Implement CSV row validation (logoName and fileName non-empty) in csvParser.ts
+- [x] T011 [P] [US1] Create src/services/importers/fileValidator.ts with detectFileType() using file-type library
+- [x] T012 [P] [US1] Implement isSupportedFormat() in fileValidator.ts (PNG, JPEG, GIF only)
+- [x] T013 [P] [US1] Implement validateFile() in fileValidator.ts returning LogoFile metadata
+- [x] T014 [US1] Create src/services/importers/brandImporter.ts with transformToBrand() function
+- [x] T015 [US1] Implement processRow() in brandImporter.ts (CSV row + file validation → Brand or error)
+- [x] T016 [US1] Implement main importBrands() orchestration function in brandImporter.ts
+- [x] T017 [US1] Create src/services/importers/reportGenerator.ts with writeBrandsJSON() function
+- [x] T018 [US1] Implement copyLogoFiles() in reportGenerator.ts to copy valid logos to public/data/brands/logos/
+- [x] T019 [US1] Create src/scripts/import-brands.ts CLI entry point with commander argument parsing
+- [x] T020 [US1] Integrate csvParser, fileValidator, brandImporter, reportGenerator in import-brands.ts
+- [x] T021 [US1] Add console output for import progress (processing X of Y rows)
+- [x] T022 [US1] Handle critical errors (CSV not found, output directory not writable) with clear error messages
 
 **Checkpoint**: At this point, User Story 1 should be fully functional - users can import CSV with all valid brand logos and get brands.json output
 
