@@ -1,0 +1,175 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://vercel.com/schemas/vercel-config.json",
+  "title": "Vercel Configuration",
+  "description": "Configuration schema for vercel.json deployment configuration",
+  "type": "object",
+  "properties": {
+    "rewrites": {
+      "type": "array",
+      "description": "URL rewrite rules for SPA routing and proxying",
+      "items": {
+        "type": "object",
+        "required": ["source", "destination"],
+        "properties": {
+          "source": {
+            "type": "string",
+            "description": "URL pattern to match (supports regex)",
+            "examples": ["/(.*)", "/api/:path*"]
+          },
+          "destination": {
+            "type": "string",
+            "description": "Target path or URL to rewrite to",
+            "examples": ["/index.html", "https://api.example.com/:path*"]
+          }
+        }
+      }
+    },
+    "redirects": {
+      "type": "array",
+      "description": "HTTP redirect rules (301/302)",
+      "items": {
+        "type": "object",
+        "required": ["source", "destination"],
+        "properties": {
+          "source": {
+            "type": "string",
+            "description": "URL pattern to match"
+          },
+          "destination": {
+            "type": "string",
+            "description": "Target URL to redirect to"
+          },
+          "permanent": {
+            "type": "boolean",
+            "description": "Use 301 (true) or 302 (false) status code",
+            "default": false
+          },
+          "statusCode": {
+            "type": "integer",
+            "description": "Custom status code (301, 302, 303, 307, 308)",
+            "enum": [301, 302, 303, 307, 308]
+          }
+        }
+      }
+    },
+    "headers": {
+      "type": "array",
+      "description": "Custom HTTP response headers",
+      "items": {
+        "type": "object",
+        "required": ["source", "headers"],
+        "properties": {
+          "source": {
+            "type": "string",
+            "description": "URL pattern to apply headers to"
+          },
+          "headers": {
+            "type": "array",
+            "description": "Header key-value pairs",
+            "items": {
+              "type": "object",
+              "required": ["key", "value"],
+              "properties": {
+                "key": {
+                  "type": "string",
+                  "description": "HTTP header name",
+                  "examples": ["Cache-Control", "X-Frame-Options", "Content-Security-Policy"]
+                },
+                "value": {
+                  "type": "string",
+                  "description": "HTTP header value"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "buildCommand": {
+      "type": "string",
+      "description": "Custom build command (overrides framework detection)",
+      "examples": ["npm run build", "pnpm build", "yarn build"]
+    },
+    "outputDirectory": {
+      "type": "string",
+      "description": "Build output directory relative to project root",
+      "examples": ["dist", "build", "out", ".next"]
+    },
+    "framework": {
+      "type": "string",
+      "description": "Framework preset for automatic configuration",
+      "enum": [
+        "vite",
+        "nextjs",
+        "create-react-app",
+        "vue",
+        "nuxtjs",
+        "gatsby",
+        "svelte",
+        "sveltekit",
+        "astro",
+        "remix",
+        "solidstart"
+      ]
+    },
+    "installCommand": {
+      "type": "string",
+      "description": "Custom install command (overrides default npm/yarn/pnpm detection)",
+      "examples": ["npm install", "pnpm install --frozen-lockfile", "yarn install --immutable"]
+    },
+    "env": {
+      "type": "object",
+      "description": "Environment variables for build and runtime",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "examples": [
+        {
+          "API_URL": "https://api.example.com",
+          "NODE_ENV": "production"
+        }
+      ]
+    },
+    "cleanUrls": {
+      "type": "boolean",
+      "description": "Remove .html extensions from URLs",
+      "default": false
+    },
+    "trailingSlash": {
+      "type": "boolean",
+      "description": "Add or remove trailing slashes from URLs",
+      "default": false
+    },
+    "public": {
+      "type": "boolean",
+      "description": "Make deployment publicly accessible (true) or require authentication (false)",
+      "default": true
+    }
+  },
+  "additionalProperties": false,
+  "examples": [
+    {
+      "rewrites": [
+        { "source": "/(.*)", "destination": "/index.html" }
+      ]
+    },
+    {
+      "framework": "vite",
+      "buildCommand": "npm run build",
+      "outputDirectory": "dist",
+      "rewrites": [
+        { "source": "/(.*)", "destination": "/index.html" }
+      ],
+      "headers": [
+        {
+          "source": "/(.*)",
+          "headers": [
+            { "key": "X-Frame-Options", "value": "DENY" },
+            { "key": "X-Content-Type-Options", "value": "nosniff" }
+          ]
+        }
+      ]
+    }
+  ]
+}
