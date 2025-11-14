@@ -1,0 +1,34 @@
+# Git
+.git/
+.gitignore
+
+# Specs and documentation
+specs/
+.specify/
+.claude/
+
+# Dependencies
+node_modules/
+
+# Development files
+*.log
+.env
+.env.*
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Testing
+coverage/
+.nyc_output/
+
+# Build (don't ignore - Vercel needs dist/)
+# dist/ - intentionally not ignored, Vercel needs this
