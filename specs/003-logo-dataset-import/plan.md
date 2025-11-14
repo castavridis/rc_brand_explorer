@@ -1,37 +1,81 @@
-# Implementation Plan: [FEATURE]
+# Implementation Plan: Brand Logos Dataset Import
 
-**Branch**: `[###-feature-name]` | **Date**: [DATE] | **Spec**: [link]
-**Input**: Feature specification from `/specs/[###-feature-name]/spec.md`
+**Branch**: `003-logo-dataset-import` | **Date**: 2025-11-14 | **Spec**: [spec.md](./spec.md)
+**Input**: Feature specification from `/specs/003-logo-dataset-import/spec.md`
 
 **Note**: This template is filled in by the `/speckit.plan` command. See `.specify/templates/commands/plan.md` for the execution workflow.
 
 ## Summary
 
-[Extract from feature spec: primary requirement + technical approach from research]
+This feature enables importing brand logo datasets from CSV files with associated image files. The system reads a CSV with `logoName` (brand name) and `fileName` columns, validates and processes PNG/JPEG/GIF images from a /Logos directory, handles malformed/unsupported files (EPS, AI, PDF) gracefully, and generates detailed import reports. The implementation will use TypeScript with Node.js for CSV processing and file validation, integrating with the existing React 18+ frontend application structure.
 
 ## Technical Context
 
-<!--
-  ACTION REQUIRED: Replace the content in this section with the technical details
-  for the project. The structure here is presented in advisory capacity to guide
-  the iteration process.
--->
+**Language/Version**: TypeScript 5.3+ (existing project standard)
+**Primary Dependencies**:
+- React 18+ (existing frontend framework)
+- Vite 5+ (existing build tool)
+- Vitest (existing test framework)
+- CSV parsing library (NEEDS CLARIFICATION: papaparse vs csv-parser vs native approach)
+- Image validation library (NEEDS CLARIFICATION: sharp vs jimp vs file-type for format detection)
 
-**Language/Version**: [e.g., Python 3.11, Swift 5.9, Rust 1.75 or NEEDS CLARIFICATION]  
-**Primary Dependencies**: [e.g., FastAPI, UIKit, LLVM or NEEDS CLARIFICATION]  
-**Storage**: [if applicable, e.g., PostgreSQL, CoreData, files or N/A]  
-**Testing**: [e.g., pytest, XCTest, cargo test or NEEDS CLARIFICATION]  
-**Target Platform**: [e.g., Linux server, iOS 15+, WASM or NEEDS CLARIFICATION]
-**Project Type**: [single/web/mobile - determines source structure]  
-**Performance Goals**: [domain-specific, e.g., 1000 req/s, 10k lines/sec, 60 fps or NEEDS CLARIFICATION]  
-**Constraints**: [domain-specific, e.g., <200ms p95, <100MB memory, offline-capable or NEEDS CLARIFICATION]  
-**Scale/Scope**: [domain-specific, e.g., 10k users, 1M LOC, 50 screens or NEEDS CLARIFICATION]
+**Storage**: File system (CSV and image files; output to /data/brands/ directory structure)
+**Testing**: Vitest (existing test framework) + @testing-library/react for components
+**Target Platform**: Web (Vite dev server + static deployment via Vercel)
+**Project Type**: Single web application (existing React SPA structure)
+**Performance Goals**:
+- Import 1,000 brand entries in under 60 seconds (per spec SC-003)
+- Support datasets with at least 1,000 logos without degradation (per spec SC-001)
+
+**Constraints**:
+- Browser file API limitations for client-side processing (NEEDS CLARIFICATION: client-side vs build-time/script approach)
+- Image files typically under 10MB each (per spec assumptions)
+- Must integrate with existing Brand interface and data structure
+
+**Scale/Scope**:
+- Support 1,000+ brand entries per import
+- Handle mixed file types (PNG, JPEG, GIF valid; EPS, AI, PDF invalid)
+- Generate detailed reports with line-by-line validation results
 
 ## Constitution Check
 
 *GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
 
-[Gates determined based on constitution file]
+### I. User-Centric Design
+
+**Status**: ✅ PASS
+
+- **User Scenarios Defined**: Yes - spec.md contains 3 prioritized user stories (P1-P3)
+- **Measurable Success Criteria**: Yes - 7 measurable outcomes defined (SC-001 through SC-007)
+- **User Value Proposition**: Clear - enables users to import existing brand logo datasets into the application, saving manual data entry time
+- **User Testing Plan**: Defined via acceptance scenarios for each priority level
+
+### II. Modular Architecture
+
+**Status**: ✅ PASS
+
+- **Self-Contained Components**: Import functionality will be isolated in dedicated services/importers/ module
+- **Clear Contracts**: Input (CSV + /Logos directory) and output (Brand[] + ImportReport) are well-defined
+- **Independent Testing**: Import logic can be tested independently with mock file systems and fixtures
+- **No Circular Dependencies**: Import service will depend only on existing Brand types and validation utilities
+- **Reusability**: CSV parser and file validator can be extracted as reusable utilities
+
+### III. Novel and Usable UI
+
+**Status**: ✅ PASS - CLI-first approach with optional future UI
+
+- **UI Innovation**: CLI tool (Phase 1) provides straightforward developer experience; browser UI deferred to Phase 2
+- **Usability Testing**: CLI tested via developer workflows; browser UI (if implemented) will require user testing
+- **Accessibility**: CLI inherits terminal accessibility features; future browser UI must meet WCAG 2.1 AA
+- **Progressive Disclosure**: Import report provides detailed errors without cluttering main output; `--verbose` flag for advanced users
+
+**Rationale**: Primary users are developers performing initial setup or periodic updates. CLI meets user needs with minimal complexity. Browser UI can be added later if non-technical users need import capability.
+
+**Post-Design Re-evaluation**: ✅ Design maintains constitutional compliance:
+- Modular services (csvParser, fileValidator, brandImporter, reportGenerator) are independently testable
+- Clear contracts defined in contracts/importer-api.ts
+- No circular dependencies introduced
+- User value demonstrated: saves hours of manual data entry for bulk imports
 
 ## Project Structure
 
@@ -48,51 +92,52 @@ specs/[###-feature]/
 ```
 
 ### Source Code (repository root)
-<!--
-  ACTION REQUIRED: Replace the placeholder tree below with the concrete layout
-  for this feature. Delete unused options and expand the chosen structure with
-  real paths (e.g., apps/admin, packages/something). The delivered plan must
-  not include Option labels.
--->
 
 ```text
-# [REMOVE IF UNUSED] Option 1: Single project (DEFAULT)
 src/
-├── models/
+├── types/
+│   ├── brand.ts              # Existing - Brand interface
+│   └── importer.ts           # NEW - ImportReport, ImportResult types
 ├── services/
-├── cli/
-└── lib/
+│   ├── brandLoader.ts        # Existing - loads brands.json
+│   ├── searchFilter.ts       # Existing - search functionality
+│   └── importers/            # NEW - import functionality
+│       ├── csvParser.ts      # CSV parsing logic
+│       ├── fileValidator.ts  # Image file validation
+│       ├── brandImporter.ts  # Main import orchestration
+│       └── reportGenerator.ts # Import report generation
+├── utils/
+│   ├── slugify.ts            # Existing - slug generation
+│   └── validation.ts         # Existing - validation utilities
+├── components/
+│   ├── LogoCard/             # Existing
+│   ├── LogoGrid/             # Existing
+│   ├── LogoModal/            # Existing
+│   └── ImportWizard/         # NEW - UI for import process (TBD)
+│       ├── ImportWizard.tsx
+│       ├── FileUpload.tsx
+│       └── ImportReport.tsx
+└── scripts/                  # NEW - CLI/build-time scripts
+    └── import-brands.ts      # Node.js script for server-side import
 
 tests/
-├── contract/
-├── integration/
-└── unit/
-
-# [REMOVE IF UNUSED] Option 2: Web application (when "frontend" + "backend" detected)
-backend/
-├── src/
-│   ├── models/
-│   ├── services/
-│   └── api/
-└── tests/
-
-frontend/
-├── src/
-│   ├── components/
-│   ├── pages/
+├── unit/
 │   └── services/
-└── tests/
+│       └── importers/        # NEW - unit tests for import logic
+│           ├── csvParser.test.ts
+│           ├── fileValidator.test.ts
+│           └── brandImporter.test.ts
+└── integration/
+    └── import-workflow.test.ts # NEW - end-to-end import tests
 
-# [REMOVE IF UNUSED] Option 3: Mobile + API (when "iOS/Android" detected)
-api/
-└── [same as backend above]
-
-ios/ or android/
-└── [platform-specific structure: feature modules, UI flows, platform tests]
+public/
+└── data/
+    └── brands/
+        ├── brands.json       # Existing - output target for imports
+        └── logos/            # Existing - logo storage directory
 ```
 
-**Structure Decision**: [Document the selected structure and reference the real
-directories captured above]
+**Structure Decision**: Single web application structure (Option 1) with modular services organization. Import functionality is isolated in `src/services/importers/` for reusability and independent testing. The implementation will support both browser-based imports (via ImportWizard component) and build-time/CLI imports (via scripts/import-brands.ts) to handle different use cases.
 
 ## Complexity Tracking
 
