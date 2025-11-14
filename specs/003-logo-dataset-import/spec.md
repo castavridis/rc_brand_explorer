@@ -1,6 +1,6 @@
 # Feature Specification: Brand Logos Dataset Import
 
-**Feature Branch**: `001-logo-dataset-import`
+**Feature Branch**: `003-logo-dataset-import`
 **Created**: 2025-11-14
 **Status**: Draft
 **Input**: User description: "Add support to import the brand logos file dataset to the repository. The DB is a CSV with two columns: logoName, fileName. The logoName column is actually the brand name of the brand. The logos themselves are in a /Logos directory. Logo files are PNG, JPEG, and GIF. There are some malformed EPS, and AI (Adobe Illustrator), and more documents in the folder, too."
