@@ -43,7 +43,7 @@ interface ValidationResult {
 /**
  * T042: Validate CSV structure and content
  */
-function validateCSVData(rows: QuarterlyCSVRow[], filename: string): ValidationResult {
+function validateCSVData(rows: QuarterlyCSVRow[]): ValidationResult {
   const result: ValidationResult = {
     isValid: true,
     errors: [],
@@ -226,7 +226,7 @@ async function main() {
         console.log(`   - Parsed ${rows.length} rows`);
 
         // T042: Validate CSV data structure and content
-        const dataValidation = validateCSVData(rows, filename);
+        const dataValidation = validateCSVData(rows);
         if (!dataValidation.isValid) {
           console.error(`   ❌ Data validation failed:`);
           dataValidation.errors.forEach(err => console.error(`      - ${err}`));
@@ -279,7 +279,7 @@ async function main() {
 
     // Step 4: Generate index.json
     console.log('\n4. Generating index.json...');
-    const index = createQuarterIndex(quarterlyDataList, csvFiles);
+    const index = createQuarterIndex(quarterlyDataList);
     const indexPath = path.join(OUTPUT_DIR, 'index.json');
     await fs.writeFile(indexPath, JSON.stringify(index, null, 2), 'utf-8');
     console.log(`✓ Written ${indexPath}`);
@@ -368,8 +368,7 @@ async function processCSVRows(
  * Create quarter index from processed data
  */
 function createQuarterIndex(
-  quarterlyDataList: QuarterlyData[],
-  csvFiles: string[]
+  quarterlyDataList: QuarterlyData[]
 ): QuarterIndex {
   // Sort quarters chronologically
   const quarters = quarterlyDataList

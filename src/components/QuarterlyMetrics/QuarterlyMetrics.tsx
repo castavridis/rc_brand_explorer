@@ -8,7 +8,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { brandAssociationService } from '../../services/brandAssociationService';
-import type { BrandWithQuarterlyData, BrandMetrics } from '../../types/quarterlyData';
+import type { BrandWithQuarterlyData } from '../../types/quarterlyData';
 import { MetricCategory } from './MetricCategory';
 import { QuarterComparison } from '../QuarterComparison';
 import './QuarterlyMetrics.css';
