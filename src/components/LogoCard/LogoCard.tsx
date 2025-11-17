@@ -1,13 +1,19 @@
 import React from 'react';
 import type { Brand } from '@/types/brand';
+import { DataAvailabilityBadge } from '../DataAvailabilityBadge';
 import styles from './LogoCard.module.css';
 
 interface LogoCardProps {
   brand: Brand;
   onClick: () => void;
+  /**
+   * T033: Optional quarter count for data availability badge
+   * Pass undefined if not loaded yet, 0 if no data
+   */
+  quarterCount?: number;
 }
 
-export const LogoCard: React.FC<LogoCardProps> = React.memo(({ brand, onClick }) => {
+export const LogoCard: React.FC<LogoCardProps> = React.memo(({ brand, onClick, quarterCount }) => {
   return (
     <article
       className={styles.logoCard}
@@ -42,6 +48,12 @@ export const LogoCard: React.FC<LogoCardProps> = React.memo(({ brand, onClick })
             }
           }}
         />
+        {/* T033: Data availability badge */}
+        {quarterCount !== undefined && (
+          <div className={styles.badge}>
+            <DataAvailabilityBadge quarterCount={quarterCount} size="small" />
+          </div>
+        )}
       </div>
       <div className={styles.content}>
         <h3 className={styles.title}>{brand.name}</h3>

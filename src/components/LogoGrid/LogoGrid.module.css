@@ -1,3 +1,100 @@
+/* T032, T035, T036: Filter controls */
+.container {
+  width: 100%;
+}
+
+.filterControls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.5rem;
+  background: var(--color-surface, #f8f9fa);
+  border-bottom: 1px solid var(--color-border, #e0e0e0);
+}
+
+.filterGroup {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.filterLabel {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.95rem;
+  color: var(--color-text, #1a1a1a);
+  cursor: pointer;
+  user-select: none;
+}
+
+.filterLabel input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+}
+
+.filterSelect {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--color-border, #e0e0e0);
+  border-radius: 6px;
+  background: var(--color-background, #ffffff);
+  color: var(--color-text, #1a1a1a);
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: border-color 0.2s ease;
+}
+
+.filterSelect:hover:not(:disabled) {
+  border-color: var(--color-primary, #3498db);
+}
+
+.filterSelect:focus {
+  outline: 2px solid var(--color-primary, #3498db);
+  outline-offset: 2px;
+}
+
+.filterSelect:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.clearFiltersBtn {
+  padding: 0.5rem 1rem;
+  background: var(--color-primary, #3498db);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.clearFiltersBtn:hover:not(:disabled) {
+  background: var(--color-primary-dark, #2980b9);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.clearFiltersBtn:focus {
+  outline: 2px solid var(--color-primary, #3498db);
+  outline-offset: 2px;
+}
+
+.clearFiltersBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.resultCount {
+  margin-left: auto;
+  font-size: 0.9rem;
+  color: var(--color-text-secondary, #7f8c8d);
+  font-weight: 500;
+}
+
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -16,6 +113,20 @@
 }
 
 @media (max-width: 768px) {
+  .filterControls {
+    padding: 1rem;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .resultCount {
+    margin-left: 0;
+    width: 100%;
+    text-align: center;
+    padding-top: 0.5rem;
+    border-top: 1px solid var(--color-border, #e0e0e0);
+  }
+
   .grid {
     grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
     gap: 1rem;

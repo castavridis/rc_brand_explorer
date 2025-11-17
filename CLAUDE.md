@@ -7,6 +7,8 @@ Auto-generated from all feature plans. Last updated: 2025-11-13
 - Static assets (JSON, SVG) served from deployment CDN (002-vercel-deployment)
 - TypeScript 5.3+ (existing project standard) (003-logo-dataset-import)
 - File system (CSV and image files; output to /data/brands/ directory structure) (003-logo-dataset-import)
+- TypeScript 5.3+ (existing project standard) + React 18.2, Vite 5.0, csv-parser 3.0 (existing), Commander 11.1 (existing) (004-quarterly-data-association)
+- Static JSON files served from /public/assets/data/ (matching existing brands.json pattern), CSV files in /public/test-data/ (or production location) (004-quarterly-data-association)
 
 - (001-logo-browser)
 
@@ -44,10 +46,10 @@ npm run import-brands ./data/brands.csv ./data/Logos -- --dry-run
 : Follow standard conventions
 
 ## Recent Changes
+- 004-quarterly-data-association: Added TypeScript 5.3+ (existing project standard) + React 18.2, Vite 5.0, csv-parser 3.0 (existing), Commander 11.1 (existing)
 - 003-logo-dataset-import: Added TypeScript 5.3+ (existing project standard)
 - 002-vercel-deployment: Added TypeScript 5.3+ (existing application stack) + Vite 5+ (build tool), React 18+ (UI framework), Vercel CLI (deployment tool)
 
-- 001-logo-browser: Added
 
 <!-- MANUAL ADDITIONS START -->
 <!-- MANUAL ADDITIONS END -->

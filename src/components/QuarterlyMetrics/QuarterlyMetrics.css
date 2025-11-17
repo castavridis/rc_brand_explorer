@@ -1,0 +1,349 @@
+/**
+ * QuarterlyMetrics Component Styles
+ * Feature: 004-quarterly-data-association
+ *
+ * WCAG 2.1 AA compliant styling
+ */
+
+.quarterly-metrics {
+  padding: 1.5rem;
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.quarterly-metrics h3 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.5rem;
+  color: #1a1a1a;
+}
+
+.data-summary {
+  margin: 0 0 1.5rem 0;
+  color: #555;
+  font-size: 0.95rem;
+}
+
+.latest-quarter {
+  color: #0066cc;
+  font-weight: 500;
+}
+
+/* Quarter sections */
+.quarter-section {
+  margin-bottom: 2.5rem;
+  padding-bottom: 2rem;
+  border-bottom: 2px solid #e5e5e5;
+}
+
+.quarter-section:last-child {
+  border-bottom: none;
+}
+
+.quarter-title {
+  font-size: 1.25rem;
+  color: #0066cc;
+  margin: 0 0 1.5rem 0;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #ddd;
+}
+
+/* Metric categories */
+.metric-category {
+  margin-bottom: 2rem;
+}
+
+.metric-category-title {
+  font-size: 1.1rem;
+  color: #333;
+  margin: 0 0 1rem 0;
+  font-weight: 600;
+}
+
+.metric-category-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+/* Metric values */
+.metric-value {
+  display: flex;
+  flex-direction: column;
+  padding: 0.75rem;
+  background: #f8f9fa;
+  border-radius: 6px;
+  border-left: 3px solid #dee2e6;
+  transition: all 0.2s ease;
+}
+
+.metric-value:hover {
+  background: #e9ecef;
+  transform: translateY(-2px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.metric-value.has-data {
+  border-left-color: #0066cc;
+}
+
+.metric-value.no-data {
+  border-left-color: #999;
+  opacity: 0.7;
+}
+
+.metric-label {
+  font-size: 0.85rem;
+  color: #666;
+  margin-bottom: 0.25rem;
+  font-weight: 500;
+}
+
+.metric-number {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1a1a1a;
+}
+
+.metric-value.no-data .metric-number {
+  color: #999;
+  font-weight: 400;
+  font-style: italic;
+}
+
+/* Loading state */
+.quarterly-metrics--loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+  padding: 3rem;
+}
+
+.spinner {
+  width: 48px;
+  height: 48px;
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #0066cc;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 1rem;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.quarterly-metrics--loading p {
+  color: #666;
+  margin: 0;
+}
+
+/* Error state */
+.quarterly-metrics--error {
+  padding: 2rem;
+  background: #fff3cd;
+  border: 1px solid #ffc107;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.error-message {
+  color: #856404;
+  font-weight: 600;
+  margin: 0 0 0.5rem 0;
+  font-size: 1.1rem;
+}
+
+.error-hint {
+  color: #856404;
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+/* Empty state */
+.quarterly-metrics--empty {
+  padding: 3rem 2rem;
+  background: #f8f9fa;
+  border: 2px dashed #dee2e6;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.empty-message {
+  color: #495057;
+  font-weight: 600;
+  margin: 0 0 0.5rem 0;
+  font-size: 1.1rem;
+}
+
+.empty-hint {
+  color: #6c757d;
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .metric-category-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .quarterly-metrics {
+    padding: 1rem;
+  }
+
+  .quarter-title {
+    font-size: 1.1rem;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .metric-value {
+    border-width: 2px;
+    border-style: solid;
+  }
+
+  .metric-value.has-data {
+    border-color: #0050a0;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .metric-value {
+    transition: none;
+  }
+
+  .spinner {
+    animation: none;
+  }
+
+  .metric-value:hover {
+    transform: none;
+  }
+}
+
+/* Print styles */
+@media print {
+  .quarterly-metrics {
+    box-shadow: none;
+    border: 1px solid #ddd;
+  }
+
+  .metric-value:hover {
+    transform: none;
+    box-shadow: none;
+  }
+
+  .spinner {
+    display: none;
+  }
+
+  .comparison-actions,
+  .comparison-overlay {
+    display: none;
+  }
+}
+
+/* T025: Compare Quarters Button */
+.comparison-actions {
+  margin-bottom: 1.5rem;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.btn-compare-quarters {
+  padding: 0.75rem 1.5rem;
+  background: #0066cc;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0, 102, 204, 0.2);
+}
+
+.btn-compare-quarters:hover {
+  background: #0052a3;
+  box-shadow: 0 4px 8px rgba(0, 102, 204, 0.3);
+  transform: translateY(-1px);
+}
+
+.btn-compare-quarters:focus {
+  outline: 2px solid #0066cc;
+  outline-offset: 2px;
+}
+
+.btn-compare-quarters:active {
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-compare-quarters:hover {
+    transform: none;
+  }
+}
+
+/* T025: Comparison Overlay Modal */
+.comparison-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  overflow: auto;
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.comparison-overlay > * {
+  max-width: 100%;
+  max-height: 100%;
+  overflow: auto;
+}
+
+/* High contrast mode adjustments for button */
+@media (prefers-contrast: high) {
+  .btn-compare-quarters {
+    border: 2px solid #ffffff;
+  }
+
+  .btn-compare-quarters:focus {
+    outline-width: 3px;
+  }
+}
+
+/* Responsive adjustments for button */
+@media (max-width: 768px) {
+  .comparison-actions {
+    justify-content: stretch;
+  }
+
+  .btn-compare-quarters {
+    width: 100%;
+  }
+
+  .comparison-overlay {
+    padding: 1rem;
+  }
+}

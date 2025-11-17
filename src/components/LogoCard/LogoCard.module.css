@@ -76,6 +76,14 @@
   text-overflow: ellipsis;
 }
 
+/* T033: Data availability badge positioning */
+.badge {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  z-index: 10;
+}
+
 @media (max-width: 768px) {
   .logoCard {
     padding: 0.75rem;
