@@ -1,0 +1,152 @@
+{
+  "timestamp": "2025-11-17T07:32:50.791Z",
+  "inputSummary": {
+    "csvPath": "/Users/cstavridis/Git/rc_brand_explorer/public/test-data/test-brands.csv",
+    "logosDir": "/Users/cstavridis/Git/rc_brand_explorer/public/test-data/Logos",
+    "totalRows": 10
+  },
+  "results": [
+    {
+      "rowNumber": 2,
+      "status": "success",
+      "brand": {
+        "id": "acme-corporation-nt865e",
+        "name": "Acme Corporation",
+        "slug": "acme-corporation",
+        "category": "Other",
+        "logoPath": "/data/brands/logos/acme.png",
+        "dateAdded": "2025-11-17T07:32:50.786Z",
+        "featured": false
+      }
+    },
+    {
+      "rowNumber": 3,
+      "status": "success",
+      "brand": {
+        "id": "techstart-inc-6bo8oa",
+        "name": "TechStart Inc",
+        "slug": "techstart-inc",
+        "category": "Technology",
+        "logoPath": "/data/brands/logos/techstart.jpg",
+        "dateAdded": "2025-11-17T07:32:50.787Z",
+        "featured": false
+      }
+    },
+    {
+      "rowNumber": 4,
+      "status": "success",
+      "brand": {
+        "id": "global-foods-x1m5m0",
+        "name": "Global Foods",
+        "slug": "global-foods",
+        "category": "Food & Beverage",
+        "logoPath": "/data/brands/logos/global-foods.gif",
+        "dateAdded": "2025-11-17T07:32:50.788Z",
+        "featured": false
+      }
+    },
+    {
+      "rowNumber": 5,
+      "status": "success",
+      "brand": {
+        "id": "digital-solutions-mebhzm",
+        "name": "Digital Solutions",
+        "slug": "digital-solutions",
+        "category": "Technology",
+        "logoPath": "/data/brands/logos/digital.png",
+        "dateAdded": "2025-11-17T07:32:50.788Z",
+        "featured": false
+      }
+    },
+    {
+      "rowNumber": 6,
+      "status": "success",
+      "brand": {
+        "id": "innovation-labs-b5xly9",
+        "name": "Innovation Labs",
+        "slug": "innovation-labs",
+        "category": "Other",
+        "logoPath": "/data/brands/logos/innovation.jpg",
+        "dateAdded": "2025-11-17T07:32:50.788Z",
+        "featured": false
+      }
+    },
+    {
+      "rowNumber": 7,
+      "status": "success",
+      "brand": {
+        "id": "future-systems-vw2xbt",
+        "name": "Future Systems",
+        "slug": "future-systems",
+        "category": "Technology",
+        "logoPath": "/data/brands/logos/future.gif",
+        "dateAdded": "2025-11-17T07:32:50.788Z",
+        "featured": false
+      }
+    },
+    {
+      "rowNumber": 8,
+      "status": "success",
+      "brand": {
+        "id": "smart-tech-24hbyl",
+        "name": "Smart Tech",
+        "slug": "smart-tech",
+        "category": "Technology",
+        "logoPath": "/data/brands/logos/smart.png",
+        "dateAdded": "2025-11-17T07:32:50.789Z",
+        "featured": false
+      }
+    },
+    {
+      "rowNumber": 9,
+      "status": "success",
+      "brand": {
+        "id": "cloud-services-tgjdbd",
+        "name": "Cloud Services",
+        "slug": "cloud-services",
+        "category": "Technology",
+        "logoPath": "/data/brands/logos/cloud.jpg",
+        "dateAdded": "2025-11-17T07:32:50.789Z",
+        "featured": false
+      }
+    },
+    {
+      "rowNumber": 10,
+      "status": "success",
+      "brand": {
+        "id": "data-analytics-8hexdc",
+        "name": "Data Analytics",
+        "slug": "data-analytics",
+        "category": "Technology",
+        "logoPath": "/data/brands/logos/data.gif",
+        "dateAdded": "2025-11-17T07:32:50.789Z",
+        "featured": false
+      }
+    },
+    {
+      "rowNumber": 11,
+      "status": "success",
+      "brand": {
+        "id": "mobile-apps-co-7vquf0",
+        "name": "Mobile Apps Co",
+        "slug": "mobile-apps-co",
+        "category": "Technology",
+        "logoPath": "/data/brands/logos/mobile.png",
+        "dateAdded": "2025-11-17T07:32:50.789Z",
+        "featured": false
+      }
+    }
+  ],
+  "summary": {
+    "totalProcessed": 10,
+    "successful": 10,
+    "failed": 0,
+    "errorBreakdown": {},
+    "warnings": 0,
+    "processingTimeMs": 4
+  },
+  "outputPaths": {
+    "brandsJson": "/Users/cstavridis/Git/rc_brand_explorer/public/test-data/output/brands.json",
+    "logosDir": "/Users/cstavridis/Git/rc_brand_explorer/public/test-data/output/logos"
+  }
+}

@@ -5,6 +5,8 @@ Auto-generated from all feature plans. Last updated: 2025-11-13
 ## Active Technologies
 - TypeScript 5.3+ (existing application stack) + Vite 5+ (build tool), React 18+ (UI framework), Vercel CLI (deployment tool) (002-vercel-deployment)
 - Static assets (JSON, SVG) served from deployment CDN (002-vercel-deployment)
+- TypeScript 5.3+ (existing project standard) (003-logo-dataset-import)
+- File system (CSV and image files; output to /data/brands/ directory structure) (003-logo-dataset-import)
 
 - (001-logo-browser)
 
@@ -17,13 +19,32 @@ tests/
 
 ## Commands
 
-# Add commands for 
+### Brand Import
+```bash
+# Import brand logos dataset from CSV file
+npm run import-brands <csv-path> <logos-dir> [output-dir]
+
+# Examples:
+npm run import-brands ./data/brands.csv ./data/Logos
+npm run import-brands ./data/brands.csv ./data/Logos ./custom-output
+
+# Options:
+#   -v, --verbose    Enable detailed logging
+#   -d, --dry-run    Validate data without writing files
+#   --version        Show version number
+#   --help           Show help
+
+# With flags:
+npm run import-brands ./data/brands.csv ./data/Logos -- --verbose
+npm run import-brands ./data/brands.csv ./data/Logos -- --dry-run
+``` 
 
 ## Code Style
 
 : Follow standard conventions
 
 ## Recent Changes
+- 003-logo-dataset-import: Added TypeScript 5.3+ (existing project standard)
 - 002-vercel-deployment: Added TypeScript 5.3+ (existing application stack) + Vite 5+ (build tool), React 18+ (UI framework), Vercel CLI (deployment tool)
 
 - 001-logo-browser: Added

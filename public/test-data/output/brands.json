@@ -1,0 +1,94 @@
+{
+  "brands": [
+    {
+      "id": "acme-corporation-nt865e",
+      "name": "Acme Corporation",
+      "slug": "acme-corporation",
+      "category": "Other",
+      "logoPath": "/data/brands/logos/acme.png",
+      "dateAdded": "2025-11-17T07:32:50.786Z",
+      "featured": false
+    },
+    {
+      "id": "techstart-inc-6bo8oa",
+      "name": "TechStart Inc",
+      "slug": "techstart-inc",
+      "category": "Technology",
+      "logoPath": "/data/brands/logos/techstart.jpg",
+      "dateAdded": "2025-11-17T07:32:50.787Z",
+      "featured": false
+    },
+    {
+      "id": "global-foods-x1m5m0",
+      "name": "Global Foods",
+      "slug": "global-foods",
+      "category": "Food & Beverage",
+      "logoPath": "/data/brands/logos/global-foods.gif",
+      "dateAdded": "2025-11-17T07:32:50.788Z",
+      "featured": false
+    },
+    {
+      "id": "digital-solutions-mebhzm",
+      "name": "Digital Solutions",
+      "slug": "digital-solutions",
+      "category": "Technology",
+      "logoPath": "/data/brands/logos/digital.png",
+      "dateAdded": "2025-11-17T07:32:50.788Z",
+      "featured": false
+    },
+    {
+      "id": "innovation-labs-b5xly9",
+      "name": "Innovation Labs",
+      "slug": "innovation-labs",
+      "category": "Other",
+      "logoPath": "/data/brands/logos/innovation.jpg",
+      "dateAdded": "2025-11-17T07:32:50.788Z",
+      "featured": false
+    },
+    {
+      "id": "future-systems-vw2xbt",
+      "name": "Future Systems",
+      "slug": "future-systems",
+      "category": "Technology",
+      "logoPath": "/data/brands/logos/future.gif",
+      "dateAdded": "2025-11-17T07:32:50.788Z",
+      "featured": false
+    },
+    {
+      "id": "smart-tech-24hbyl",
+      "name": "Smart Tech",
+      "slug": "smart-tech",
+      "category": "Technology",
+      "logoPath": "/data/brands/logos/smart.png",
+      "dateAdded": "2025-11-17T07:32:50.789Z",
+      "featured": false
+    },
+    {
+      "id": "cloud-services-tgjdbd",
+      "name": "Cloud Services",
+      "slug": "cloud-services",
+      "category": "Technology",
+      "logoPath": "/data/brands/logos/cloud.jpg",
+      "dateAdded": "2025-11-17T07:32:50.789Z",
+      "featured": false
+    },
+    {
+      "id": "data-analytics-8hexdc",
+      "name": "Data Analytics",
+      "slug": "data-analytics",
+      "category": "Technology",
+      "logoPath": "/data/brands/logos/data.gif",
+      "dateAdded": "2025-11-17T07:32:50.789Z",
+      "featured": false
+    },
+    {
+      "id": "mobile-apps-co-7vquf0",
+      "name": "Mobile Apps Co",
+      "slug": "mobile-apps-co",
+      "category": "Technology",
+      "logoPath": "/data/brands/logos/mobile.png",
+      "dateAdded": "2025-11-17T07:32:50.789Z",
+      "featured": false
+    }
+  ]
+}
