@@ -1,0 +1,11 @@
+{
+  "quarters": [
+    "2010Q1"
+  ],
+  "quarterFiles": {
+    "2010Q1": "2010Q1-Table 1.csv",
+    "UNKNOWN": "test-brands.csv"
+  },
+  "lastUpdated": "2025-11-17T10:43:06.484Z",
+  "totalQuarters": 1
+}

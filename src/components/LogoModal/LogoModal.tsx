@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
 import type { Brand } from '@/types/brand';
+import { QuarterlyMetrics } from '../QuarterlyMetrics';
+import { QuarterlyDataErrorBoundary } from '../ErrorBoundary';
 import styles from './LogoModal.module.css';
 
 interface LogoModalProps {
@@ -85,6 +87,23 @@ export const LogoModal: React.FC<LogoModalProps> = ({ brand, onClose, open }) =>
                 ))}
               </div>
             )}
+          </div>
+
+          {/* Quarterly Brand Perception Data - T040: Wrapped with error boundary */}
+          <div className={styles.quarterlyData}>
+            <QuarterlyDataErrorBoundary
+              componentName="Quarterly Metrics"
+              onError={(error, errorInfo) => {
+                console.error('[LogoModal] QuarterlyMetrics error:', {
+                  brandId: brand.id,
+                  brandName: brand.name,
+                  error: error.message,
+                  stack: errorInfo.componentStack,
+                });
+              }}
+            >
+              <QuarterlyMetrics brandId={brand.id} />
+            </QuarterlyDataErrorBoundary>
           </div>
         </div>
       </div>

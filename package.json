@@ -11,7 +11,8 @@
     "test": "vitest",
     "test:ui": "vitest --ui",
     "test:coverage": "vitest --coverage",
-    "import-brands": "tsx src/scripts/import-brands.ts"
+    "import-brands": "tsx src/scripts/import-brands.ts",
+    "process-quarterly-data": "tsx src/scripts/process-quarterly-data.ts"
   },
   "dependencies": {
     "commander": "^11.1.0",

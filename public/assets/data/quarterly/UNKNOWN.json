@@ -1,0 +1,9 @@
+{
+  "quarter": "UNKNOWN",
+  "sourceFile": "test-brands.csv",
+  "processedAt": "2025-11-17T10:43:06.484Z",
+  "recordCount": 10,
+  "matchedBrands": 0,
+  "unmatchedBrands": [],
+  "records": []
+}

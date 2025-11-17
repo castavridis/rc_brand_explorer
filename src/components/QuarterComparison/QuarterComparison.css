@@ -1,0 +1,620 @@
+/**
+ * QuarterComparison Component Styles
+ * Feature: 004-quarterly-data-association
+ *
+ * Accessible, responsive styles for multi-quarter comparison view
+ * WCAG 2.1 AA compliant
+ */
+
+/* ==========================================================================
+   CSS Variables
+   ========================================================================== */
+
+:root {
+  --qc-spacing-xs: 0.5rem;
+  --qc-spacing-sm: 0.75rem;
+  --qc-spacing-md: 1rem;
+  --qc-spacing-lg: 1.5rem;
+  --qc-spacing-xl: 2rem;
+
+  --qc-border-radius: 0.5rem;
+  --qc-border-color: #e0e0e0;
+
+  --qc-bg-primary: #ffffff;
+  --qc-bg-secondary: #f5f5f5;
+  --qc-bg-hover: #e8f4f8;
+  --qc-bg-selected: #d0e8f2;
+
+  --qc-text-primary: #2c3e50;
+  --qc-text-secondary: #7f8c8d;
+  --qc-text-muted: #95a5a6;
+
+  --qc-color-positive: #27ae60;
+  --qc-color-negative: #e74c3c;
+  --qc-color-neutral: #7f8c8d;
+
+  --qc-focus-outline: 2px solid #3498db;
+  --qc-focus-offset: 2px;
+
+  --qc-transition-speed: 200ms;
+}
+
+/* High contrast mode overrides */
+@media (prefers-contrast: high) {
+  :root {
+    --qc-border-color: #000000;
+    --qc-bg-hover: #ffff00;
+    --qc-bg-selected: #00ff00;
+    --qc-text-primary: #000000;
+    --qc-focus-outline: 3px solid #000000;
+  }
+}
+
+/* ==========================================================================
+   Main Container
+   ========================================================================== */
+
+.quarter-comparison {
+  background: var(--qc-bg-primary);
+  border-radius: var(--qc-border-radius);
+  padding: var(--qc-spacing-lg);
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* Loading state */
+.quarter-comparison--loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+  padding: var(--qc-spacing-xl);
+}
+
+.quarter-comparison--loading .spinner {
+  width: 48px;
+  height: 48px;
+  border: 4px solid var(--qc-border-color);
+  border-top-color: #3498db;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .quarter-comparison--loading .spinner {
+    animation: none;
+    border-top-color: #3498db;
+  }
+}
+
+.quarter-comparison--loading p {
+  margin-top: var(--qc-spacing-md);
+  color: var(--qc-text-secondary);
+  font-size: 0.95rem;
+}
+
+/* Error state */
+.quarter-comparison--error {
+  padding: var(--qc-spacing-lg);
+  text-align: center;
+}
+
+.error-message {
+  color: var(--qc-color-negative);
+  font-weight: 500;
+  margin-bottom: var(--qc-spacing-md);
+}
+
+/* Empty state */
+.quarter-comparison--empty {
+  padding: var(--qc-spacing-lg);
+  text-align: center;
+}
+
+.empty-message {
+  color: var(--qc-text-muted);
+  font-size: 0.95rem;
+  margin-bottom: var(--qc-spacing-md);
+}
+
+/* ==========================================================================
+   Header
+   ========================================================================== */
+
+.quarter-comparison-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--qc-spacing-lg);
+  padding-bottom: var(--qc-spacing-md);
+  border-bottom: 2px solid var(--qc-border-color);
+}
+
+.quarter-comparison-header h2 {
+  margin: 0;
+  color: var(--qc-text-primary);
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.btn-close {
+  background: transparent;
+  border: 1px solid var(--qc-border-color);
+  border-radius: var(--qc-border-radius);
+  padding: var(--qc-spacing-xs) var(--qc-spacing-md);
+  font-size: 1.5rem;
+  line-height: 1;
+  color: var(--qc-text-secondary);
+  cursor: pointer;
+  transition: all var(--qc-transition-speed) ease;
+}
+
+.btn-close:hover {
+  background: var(--qc-bg-hover);
+  color: var(--qc-text-primary);
+}
+
+.btn-close:focus {
+  outline: var(--qc-focus-outline);
+  outline-offset: var(--qc-focus-offset);
+}
+
+/* ==========================================================================
+   Content Layout
+   ========================================================================== */
+
+.quarter-comparison-content {
+  display: flex;
+  gap: var(--qc-spacing-lg);
+}
+
+.quarter-comparison-sidebar {
+  flex: 0 0 320px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--qc-spacing-lg);
+}
+
+.quarter-comparison-main {
+  flex: 1;
+  min-width: 0; /* Allow flex item to shrink below content size */
+}
+
+/* ==========================================================================
+   Quarter Selector
+   ========================================================================== */
+
+.quarter-selector {
+  background: var(--qc-bg-secondary);
+  border-radius: var(--qc-border-radius);
+  padding: var(--qc-spacing-md);
+}
+
+.quarter-selector-header {
+  margin-bottom: var(--qc-spacing-md);
+}
+
+.quarter-selector-header h4 {
+  margin: 0 0 var(--qc-spacing-sm) 0;
+  color: var(--qc-text-primary);
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.quarter-selector-actions {
+  display: flex;
+  gap: var(--qc-spacing-xs);
+}
+
+.btn-select-all,
+.btn-clear-all {
+  flex: 1;
+  padding: var(--qc-spacing-xs) var(--qc-spacing-sm);
+  background: var(--qc-bg-primary);
+  border: 1px solid var(--qc-border-color);
+  border-radius: var(--qc-border-radius);
+  font-size: 0.85rem;
+  color: var(--qc-text-primary);
+  cursor: pointer;
+  transition: all var(--qc-transition-speed) ease;
+}
+
+.btn-select-all:hover:not(:disabled),
+.btn-clear-all:hover:not(:disabled) {
+  background: var(--qc-bg-hover);
+}
+
+.btn-select-all:disabled,
+.btn-clear-all:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-select-all:focus,
+.btn-clear-all:focus {
+  outline: var(--qc-focus-outline);
+  outline-offset: var(--qc-focus-offset);
+}
+
+.quarter-selector-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--qc-spacing-xs);
+  margin-bottom: var(--qc-spacing-sm);
+}
+
+/* ==========================================================================
+   Metric Selector
+   ========================================================================== */
+
+.metric-selector {
+  background: var(--qc-bg-secondary);
+  border-radius: var(--qc-border-radius);
+  padding: var(--qc-spacing-md);
+  max-height: 600px;
+  overflow-y: auto;
+}
+
+.metric-selector-header {
+  margin-bottom: var(--qc-spacing-md);
+}
+
+.metric-selector h4 {
+  margin: 0 0 var(--qc-spacing-xs) 0;
+  color: var(--qc-text-primary);
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.keyboard-hint {
+  margin: 0;
+  color: var(--qc-text-muted);
+  font-size: 0.8rem;
+  font-style: italic;
+}
+
+.keyboard-hint small {
+  font-size: inherit;
+}
+
+.metric-category-section {
+  margin-bottom: var(--qc-spacing-md);
+}
+
+.metric-category-section:last-child {
+  margin-bottom: 0;
+}
+
+.metric-category-heading {
+  margin: 0 0 var(--qc-spacing-sm) 0;
+  color: var(--qc-text-secondary);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.metric-options-grid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--qc-spacing-xs);
+}
+
+/* ==========================================================================
+   Checkbox Styles (Quarter & Metric)
+   ========================================================================== */
+
+.quarter-checkbox,
+.metric-checkbox {
+  display: flex;
+  align-items: center;
+  gap: var(--qc-spacing-xs);
+  padding: var(--qc-spacing-xs) var(--qc-spacing-sm);
+  background: var(--qc-bg-primary);
+  border: 1px solid var(--qc-border-color);
+  border-radius: var(--qc-border-radius);
+  cursor: pointer;
+  transition: all var(--qc-transition-speed) ease;
+}
+
+.quarter-checkbox:hover,
+.metric-checkbox:hover {
+  background: var(--qc-bg-hover);
+}
+
+.quarter-checkbox.selected,
+.metric-checkbox.selected {
+  background: var(--qc-bg-selected);
+  border-color: #3498db;
+}
+
+.quarter-checkbox input[type="checkbox"],
+.metric-checkbox input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  margin: 0;
+}
+
+.quarter-checkbox input[type="checkbox"]:focus,
+.metric-checkbox input[type="checkbox"]:focus {
+  outline: var(--qc-focus-outline);
+  outline-offset: var(--qc-focus-offset);
+}
+
+.quarter-label,
+.metric-label {
+  flex: 1;
+  font-size: 0.9rem;
+  color: var(--qc-text-primary);
+  user-select: none;
+}
+
+.selection-summary {
+  margin: var(--qc-spacing-sm) 0 0 0;
+  padding: var(--qc-spacing-xs) var(--qc-spacing-sm);
+  background: var(--qc-bg-primary);
+  border-radius: var(--qc-border-radius);
+  font-size: 0.85rem;
+  color: var(--qc-text-secondary);
+  text-align: center;
+}
+
+/* ==========================================================================
+   Comparison Table
+   ========================================================================== */
+
+.comparison-table-wrapper {
+  overflow-x: auto;
+  background: var(--qc-bg-primary);
+  border: 1px solid var(--qc-border-color);
+  border-radius: var(--qc-border-radius);
+  margin-bottom: var(--qc-spacing-lg);
+}
+
+.comparison-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.comparison-table thead {
+  background: var(--qc-bg-secondary);
+  border-bottom: 2px solid var(--qc-border-color);
+}
+
+.comparison-table th {
+  padding: var(--qc-spacing-md);
+  text-align: left;
+  font-weight: 600;
+  color: var(--qc-text-primary);
+  white-space: nowrap;
+}
+
+.comparison-table th.change-column {
+  text-align: center;
+  min-width: 150px;
+}
+
+.comparison-table tbody tr {
+  border-bottom: 1px solid var(--qc-border-color);
+  transition: background var(--qc-transition-speed) ease;
+}
+
+.comparison-table tbody tr:hover {
+  background: var(--qc-bg-hover);
+}
+
+.comparison-table tbody tr:last-child {
+  border-bottom: none;
+}
+
+.comparison-table td {
+  padding: var(--qc-spacing-md);
+  color: var(--qc-text-primary);
+}
+
+.comparison-table th.metric-name {
+  font-weight: 500;
+  background: var(--qc-bg-secondary);
+  position: sticky;
+  left: 0;
+  z-index: 1;
+}
+
+.comparison-table td.metric-value {
+  text-align: left;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.comparison-table td.change-value {
+  text-align: center;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.comparison-table td.change-value.positive {
+  color: var(--qc-color-positive);
+}
+
+.comparison-table td.change-value.negative {
+  color: var(--qc-color-negative);
+}
+
+.comparison-table td.change-value.neutral {
+  color: var(--qc-color-neutral);
+}
+
+.change-indicator {
+  font-size: 1.1em;
+  margin-left: var(--qc-spacing-xs);
+}
+
+.comparison-table-empty {
+  padding: var(--qc-spacing-xl);
+  text-align: center;
+  color: var(--qc-text-muted);
+}
+
+/* ==========================================================================
+   Comparison Insights
+   ========================================================================== */
+
+.comparison-insights {
+  background: var(--qc-bg-secondary);
+  border-radius: var(--qc-border-radius);
+  padding: var(--qc-spacing-md);
+}
+
+.comparison-insights h3 {
+  margin: 0 0 var(--qc-spacing-sm) 0;
+  color: var(--qc-text-primary);
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.comparison-insights p {
+  margin: var(--qc-spacing-xs) 0;
+  color: var(--qc-text-secondary);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.insight-note {
+  font-style: italic;
+  font-size: 0.85rem !important;
+  color: var(--qc-text-muted) !important;
+  margin-top: var(--qc-spacing-sm) !important;
+}
+
+/* ==========================================================================
+   Responsive Design
+   ========================================================================== */
+
+@media (max-width: 1024px) {
+  .quarter-comparison-content {
+    flex-direction: column;
+  }
+
+  .quarter-comparison-sidebar {
+    flex: 1;
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .quarter-comparison {
+    padding: var(--qc-spacing-md);
+  }
+
+  .quarter-comparison-header h2 {
+    font-size: 1.25rem;
+  }
+
+  .quarter-selector-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .comparison-table {
+    font-size: 0.85rem;
+  }
+
+  .comparison-table th,
+  .comparison-table td {
+    padding: var(--qc-spacing-sm);
+  }
+}
+
+@media (max-width: 480px) {
+  .quarter-comparison-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--qc-spacing-sm);
+  }
+
+  .btn-close {
+    align-self: flex-end;
+  }
+}
+
+/* ==========================================================================
+   Print Styles
+   ========================================================================== */
+
+@media print {
+  .quarter-comparison {
+    background: white;
+    padding: 0;
+  }
+
+  .quarter-comparison-header {
+    border-bottom: 2px solid black;
+  }
+
+  .btn-close {
+    display: none;
+  }
+
+  .quarter-comparison-sidebar {
+    display: none;
+  }
+
+  .comparison-table-wrapper {
+    border: 1px solid black;
+  }
+
+  .comparison-table {
+    font-size: 10pt;
+  }
+
+  .comparison-table tbody tr {
+    page-break-inside: avoid;
+  }
+
+  .comparison-insights {
+    page-break-before: avoid;
+  }
+}
+
+/* ==========================================================================
+   Accessibility Enhancements
+   ========================================================================== */
+
+/* Ensure minimum touch target size (44x44px) for mobile */
+@media (pointer: coarse) {
+  .quarter-checkbox,
+  .metric-checkbox,
+  .btn-select-all,
+  .btn-clear-all,
+  .btn-close {
+    min-height: 44px;
+  }
+}
+
+/* Focus visible for keyboard navigation */
+@media (prefers-reduced-motion: no-preference) {
+  .quarter-checkbox:focus-within,
+  .metric-checkbox:focus-within {
+    transform: translateX(2px);
+  }
+}
+
+/* Screen reader only text */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}

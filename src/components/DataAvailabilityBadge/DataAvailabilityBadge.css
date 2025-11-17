@@ -1,0 +1,264 @@
+/**
+ * DataAvailabilityBadge Component Styles
+ * Feature: 004-quarterly-data-association
+ *
+ * Compact badge to indicate quarterly data availability
+ * WCAG 2.1 AA compliant
+ * T030: Badge styling implementation
+ */
+
+/* ==========================================================================
+   CSS Variables
+   ========================================================================== */
+
+:root {
+  --badge-spacing-xs: 0.25rem;
+  --badge-spacing-sm: 0.5rem;
+  --badge-spacing-md: 0.75rem;
+
+  --badge-border-radius: 0.375rem;
+
+  --badge-bg-has-data: #d0e8f2;
+  --badge-bg-no-data: #f5f5f5;
+
+  --badge-text-has-data: #0066cc;
+  --badge-text-no-data: #999999;
+
+  --badge-border-has-data: #3498db;
+  --badge-border-no-data: #dddddd;
+
+  --badge-transition-speed: 150ms;
+}
+
+/* High contrast mode overrides */
+@media (prefers-contrast: high) {
+  :root {
+    --badge-bg-has-data: #ffff00;
+    --badge-bg-no-data: #ffffff;
+    --badge-text-has-data: #000000;
+    --badge-text-no-data: #000000;
+    --badge-border-has-data: #000000;
+    --badge-border-no-data: #000000;
+  }
+}
+
+/* ==========================================================================
+   Base Badge Styles
+   ========================================================================== */
+
+.data-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--badge-spacing-xs);
+  border-radius: var(--badge-border-radius);
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+  transition: all var(--badge-transition-speed) ease;
+}
+
+/* Badge with data */
+.data-badge--has-data {
+  background: var(--badge-bg-has-data);
+  color: var(--badge-text-has-data);
+  border: 1px solid var(--badge-border-has-data);
+}
+
+/* Badge without data */
+.data-badge--no-data {
+  background: var(--badge-bg-no-data);
+  color: var(--badge-text-no-data);
+  border: 1px solid var(--badge-border-no-data);
+}
+
+/* ==========================================================================
+   Size Variants
+   ========================================================================== */
+
+.data-badge--small {
+  padding: var(--badge-spacing-xs) var(--badge-spacing-sm);
+  font-size: 0.75rem;
+}
+
+.data-badge--medium {
+  padding: var(--badge-spacing-sm) var(--badge-spacing-md);
+  font-size: 0.85rem;
+}
+
+.data-badge--large {
+  padding: var(--badge-spacing-md) 1rem;
+  font-size: 0.95rem;
+}
+
+/* ==========================================================================
+   Badge Icon
+   ========================================================================== */
+
+.data-badge-icon {
+  font-size: 1.1em;
+  line-height: 1;
+}
+
+/* ==========================================================================
+   Badge Text
+   ========================================================================== */
+
+.data-badge-text {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ==========================================================================
+   Detailed Variant
+   ========================================================================== */
+
+.data-badge--detailed {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--badge-spacing-sm);
+  padding: var(--badge-spacing-md);
+}
+
+.data-badge-header {
+  display: flex;
+  align-items: center;
+  gap: var(--badge-spacing-xs);
+  font-weight: 700;
+}
+
+.data-badge-label {
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-size: 0.7em;
+}
+
+.data-badge-quarters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--badge-spacing-xs);
+  margin-top: var(--badge-spacing-xs);
+}
+
+.quarter-chip {
+  background: rgba(255, 255, 255, 0.6);
+  padding: 0.2rem 0.4rem;
+  border-radius: 0.25rem;
+  font-size: 0.7em;
+  font-weight: 500;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.data-badge-count {
+  font-size: 0.85em;
+  font-weight: 500;
+  opacity: 0.9;
+}
+
+/* ==========================================================================
+   Hover States (for interactive contexts)
+   ========================================================================== */
+
+.data-badge--has-data:hover {
+  background: #b8dff0;
+  box-shadow: 0 1px 3px rgba(0, 102, 204, 0.2);
+}
+
+.data-badge--no-data:hover {
+  background: #eeeeee;
+}
+
+/* ==========================================================================
+   Accessibility
+   ========================================================================== */
+
+/* Screen reader only text */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Focus indicator (if badge becomes interactive) */
+.data-badge:focus {
+  outline: 2px solid var(--badge-border-has-data);
+  outline-offset: 2px;
+}
+
+/* ==========================================================================
+   Reduced Motion Support
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .data-badge {
+    transition: none;
+  }
+
+  .data-badge--has-data:hover,
+  .data-badge--no-data:hover {
+    transform: none;
+  }
+}
+
+/* ==========================================================================
+   Print Styles
+   ========================================================================== */
+
+@media print {
+  .data-badge {
+    border: 1px solid #000000;
+    background: #ffffff !important;
+    color: #000000 !important;
+    box-shadow: none;
+  }
+
+  .data-badge-icon {
+    display: none;
+  }
+
+  .data-badge--has-data::before {
+    content: '[DATA] ';
+    font-weight: bold;
+  }
+
+  .data-badge--no-data::before {
+    content: '[NO DATA] ';
+  }
+}
+
+/* ==========================================================================
+   High Contrast Mode Enhancements
+   ========================================================================== */
+
+@media (prefers-contrast: high) {
+  .data-badge {
+    border-width: 2px;
+  }
+
+  .data-badge:focus {
+    outline-width: 3px;
+  }
+
+  .quarter-chip {
+    border-width: 2px;
+    border-color: #000000;
+  }
+}
+
+/* ==========================================================================
+   Responsive Design
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  .data-badge--detailed {
+    font-size: 0.85rem;
+  }
+
+  .data-badge-quarters {
+    max-width: 100%;
+  }
+}
