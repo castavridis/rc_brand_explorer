@@ -1,11 +1,26 @@
 {
   "quarters": [
-    "2010Q1"
+    "2008Q1",
+    "2008Q2",
+    "2008Q3",
+    "2008Q4",
+    "2009Q1",
+    "2009Q2",
+    "2009Q3",
+    "2009Q4",
+    "2010Q2"
   ],
   "quarterFiles": {
-    "2010Q1": "2010Q1-Table 1.csv",
-    "UNKNOWN": "test-brands.csv"
+    "2008Q1": "2008Q1-Table 1.csv",
+    "2008Q2": "2008Q2-Table 1.csv",
+    "2008Q3": "2008Q3-Table 1.csv",
+    "2008Q4": "2008Q4-Table 1.csv",
+    "2009Q1": "2009Q1-Table 1.csv",
+    "2009Q2": "2009Q2-Table 1.csv",
+    "2009Q3": "2009Q3-Table 1.csv",
+    "2009Q4": "2009Q4-Table 1.csv",
+    "2010Q2": "2010Q2-Table 1.csv"
   },
-  "lastUpdated": "2025-11-17T10:43:06.484Z",
-  "totalQuarters": 1
+  "lastUpdated": "2025-11-17T19:17:38.088Z",
+  "totalQuarters": 9
 }

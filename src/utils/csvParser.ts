@@ -29,13 +29,20 @@ export interface QuarterlyCSVRow {
  * @example
  * const rows = await parseQuarterlyCSV('./2010Q1-Table 1.csv');
  * console.log(rows[0]['Brand name']); // "7UP"
+ *
+ * Note: Skips first 4 rows which contain:
+ * - Row 1: "Table 1" title
+ * - Row 2: "BAV data" subtitle
+ * - Row 3: Empty row
+ * - Row 4: Category descriptions
+ * - Row 5: Actual column headers (Brand id, Brand name, etc.)
  */
 export async function parseQuarterlyCSV(csvPath: string): Promise<QuarterlyCSVRow[]> {
   return new Promise((resolve, reject) => {
     const rows: QuarterlyCSVRow[] = [];
 
     createReadStream(csvPath)
-      .pipe(csvParser())
+      .pipe(csvParser({ skipLines: 4 }))
       .on('data', (row: QuarterlyCSVRow) => {
         rows.push(row);
       })
