@@ -19,7 +19,25 @@ tests/
 
 ## Commands
 
-# Add commands for 
+### Brand Import
+```bash
+# Import brand logos dataset from CSV file
+npm run import-brands <csv-path> <logos-dir> [output-dir]
+
+# Examples:
+npm run import-brands ./data/brands.csv ./data/Logos
+npm run import-brands ./data/brands.csv ./data/Logos ./custom-output
+
+# Options:
+#   -v, --verbose    Enable detailed logging
+#   -d, --dry-run    Validate data without writing files
+#   --version        Show version number
+#   --help           Show help
+
+# With flags:
+npm run import-brands ./data/brands.csv ./data/Logos -- --verbose
+npm run import-brands ./data/brands.csv ./data/Logos -- --dry-run
+``` 
 
 ## Code Style
 

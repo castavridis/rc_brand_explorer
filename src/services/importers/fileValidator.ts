@@ -37,11 +37,13 @@ export async function detectFileType(filePath: string): Promise<ImageFileType> {
     if (mimeType === 'image/jpeg') return 'jpeg';
     if (mimeType === 'image/gif') return 'gif';
     if (mimeType === 'application/postscript') return 'eps';
-    if (mimeType === 'application/pdf') return 'pdf';
 
     // Check for Adobe Illustrator (.ai) - often detected as PDF
-    if (mimeType === 'application/pdf' && buffer.toString('utf-8', 0, 100).includes('%!PS-Adobe')) {
-      return 'ai';
+    if (mimeType === 'application/pdf') {
+      if (buffer.toString('utf-8', 0, 100).includes('%!PS-Adobe')) {
+        return 'ai';
+      }
+      return 'pdf';
     }
 
     return 'unknown';
@@ -53,11 +55,29 @@ export async function detectFileType(filePath: string): Promise<ImageFileType> {
 /**
  * Check if file type is supported (PNG, JPEG, GIF only)
  *
+ * Explicitly rejects:
+ * - EPS (Encapsulated PostScript) files
+ * - AI (Adobe Illustrator) files
+ * - PDF (Portable Document Format) files
+ * - Any other unsupported formats
+ *
  * @param fileType - Detected file type
  * @returns True if supported format
  */
 export function isSupportedFormat(fileType: ImageFileType): boolean {
-  return SUPPORTED_FORMATS.includes(fileType);
+  // Explicitly check supported formats
+  if (SUPPORTED_FORMATS.includes(fileType)) {
+    return true;
+  }
+
+  // Explicitly reject known unsupported formats
+  const unsupportedFormats: ImageFileType[] = ['eps', 'ai', 'pdf'];
+  if (unsupportedFormats.includes(fileType)) {
+    return false;
+  }
+
+  // Reject unknown formats
+  return false;
 }
 
 /**

@@ -46,9 +46,15 @@ export async function parseCSV(csvPath: string): Promise<CSVRow[]> {
       // Parse CSV line (basic parsing - handles quoted fields)
       const columns = parseCSVLine(line);
 
-      // Skip rows with wrong column count
+      // Validate column count (must be exactly 2)
       if (columns.length !== 2) {
-        continue; // Will be validated and reported later
+        // Add malformed row with empty values for error reporting
+        rows.push({
+          logoName: columns[0] || '',
+          fileName: columns[1] || '',
+          lineNumber: hasHeader ? i + 1 : i + 1
+        });
+        continue;
       }
 
       const [logoName, fileName] = columns;

@@ -5,14 +5,14 @@
  * Handles error recovery and generates import results for each CSV row.
  */
 
-import path from 'path';
 import type { Brand } from '../../types/brand';
-import type { CSVRow, LogoFile, ImportInput, ImportResult, ImportReport } from '../../types/importer';
+import type { CSVRow, LogoFile, ImportInput, ImportResult } from '../../types/importer';
 import { generateBrandId, slugify } from '../../utils/slugify';
 import { inferCategory } from '../../utils/categoryInference';
 import { fileExists, resolvePath } from '../../utils/fileSystem';
 import { parseCSV, validateRow } from './csvParser';
 import { validateFile } from './fileValidator';
+import { MAX_FILE_SIZE_WARN } from '../../types/importer';
 
 /**
  * Transform validated CSV row + logo file into Brand entity
@@ -91,10 +91,20 @@ export async function processRow(row: CSVRow, logosDir: string): Promise<ImportR
       return result;
     }
 
-    // Step 4: Transform to Brand
+    // Step 4: Check for file size warnings (non-fatal)
+    const warnings: string[] = [];
+    if (logoFile.fileSize > MAX_FILE_SIZE_WARN) {
+      const sizeMB = (logoFile.fileSize / (1024 * 1024)).toFixed(2);
+      warnings.push(`Large file size: ${sizeMB}MB (consider optimizing for web)`);
+    }
+
+    // Step 5: Transform to Brand
     const brand = transformToBrand(row, logoFile);
     result.brand = brand;
     result.status = 'success';
+    if (warnings.length > 0) {
+      result.warnings = warnings;
+    }
 
     return result;
 
@@ -110,13 +120,26 @@ export async function processRow(row: CSVRow, logosDir: string): Promise<ImportR
 }
 
 /**
+ * Check if brand name is duplicate (case-insensitive)
+ *
+ * @param brandName - Brand name to check
+ * @param seenBrands - Set of previously seen brand names (lowercase)
+ * @returns True if duplicate detected
+ */
+export function isDuplicate(brandName: string, seenBrands: Set<string>): boolean {
+  const normalized = brandName.toLowerCase().trim();
+  return seenBrands.has(normalized);
+}
+
+/**
  * Execute complete brand import operation
  *
  * Main orchestration function that:
  * 1. Parses CSV file
  * 2. Processes each row (validate + transform)
- * 3. Collects successful brands and errors
- * 4. Returns results for report generation
+ * 3. Detects duplicate brand names
+ * 4. Collects successful brands and errors
+ * 5. Returns results for report generation
  *
  * @param input - Import configuration
  * @returns Array of import results (one per CSV row)
@@ -130,14 +153,40 @@ export async function importBrands(input: ImportInput): Promise<ImportResult[]> 
     const rows = await parseCSV(input.csvPath);
     console.log(`Found ${rows.length} rows to process`);
 
-    // Step 2: Process each row
+    // Step 2: Initialize duplicate tracking (case-insensitive)
+    const seenBrands = new Set<string>();
+
+    // Step 3: Process each row
     const results: ImportResult[] = [];
 
     for (let i = 0; i < rows.length; i++) {
       const row = rows[i];
       console.log(`Processing ${i + 1}/${rows.length}: ${row.logoName}`);
 
+      // Check for duplicate brand name (FR-016)
+      if (isDuplicate(row.logoName, seenBrands)) {
+        const result: ImportResult = {
+          rowNumber: row.lineNumber,
+          status: 'duplicate_brand',
+          error: {
+            code: 'duplicate_brand',
+            message: `Duplicate brand name: "${row.logoName}" (first occurrence kept)`,
+            field: 'logoName',
+            details: `Line ${row.lineNumber}`
+          }
+        };
+        results.push(result);
+        continue; // Skip duplicate, don't add to seenBrands again
+      }
+
+      // Process the row
       const result = await processRow(row, input.logosDir);
+
+      // If successful, mark brand name as seen
+      if (result.status === 'success') {
+        seenBrands.add(row.logoName.toLowerCase().trim());
+      }
+
       results.push(result);
     }
 

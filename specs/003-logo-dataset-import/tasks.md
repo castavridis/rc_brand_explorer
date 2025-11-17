@@ -79,15 +79,15 @@
 
 ### Implementation for User Story 2
 
-- [ ] T023 [P] [US2] Extend isSupportedFormat() in fileValidator.ts to explicitly reject EPS format
-- [ ] T024 [P] [US2] Extend isSupportedFormat() in fileValidator.ts to explicitly reject AI format
-- [ ] T025 [P] [US2] Extend isSupportedFormat() in fileValidator.ts to explicitly reject PDF format
-- [ ] T026 [US2] Update validateFile() in fileValidator.ts to set isValid=false for unsupported formats
-- [ ] T027 [US2] Add error message generation for unsupported file types in validateFile()
-- [ ] T028 [US2] Update processRow() in brandImporter.ts to handle file_not_found status
-- [ ] T029 [US2] Update processRow() in brandImporter.ts to handle file_type_error status
-- [ ] T030 [US2] Ensure importBrands() continues processing after encountering invalid files
-- [ ] T031 [US2] Add console logging for skipped files with reasons (EPS/AI/PDF/not found)
+- [x] T023 [P] [US2] Extend isSupportedFormat() in fileValidator.ts to explicitly reject EPS format
+- [x] T024 [P] [US2] Extend isSupportedFormat() in fileValidator.ts to explicitly reject AI format
+- [x] T025 [P] [US2] Extend isSupportedFormat() in fileValidator.ts to explicitly reject PDF format
+- [x] T026 [US2] Update validateFile() in fileValidator.ts to set isValid=false for unsupported formats
+- [x] T027 [US2] Add error message generation for unsupported file types in validateFile()
+- [x] T028 [US2] Update processRow() in brandImporter.ts to handle file_not_found status
+- [x] T029 [US2] Update processRow() in brandImporter.ts to handle file_type_error status
+- [x] T030 [US2] Ensure importBrands() continues processing after encountering invalid files
+- [x] T031 [US2] Add console logging for skipped files with reasons (EPS/AI/PDF/not found)
 
 **Checkpoint**: At this point, User Stories 1 AND 2 should both work - imports handle mixed valid/invalid files without breaking
 
@@ -101,18 +101,18 @@
 
 ### Implementation for User Story 3
 
-- [ ] T032 [P] [US3] Implement duplicate brand name detection in brandImporter.ts with isDuplicate() function
-- [ ] T033 [P] [US3] Add Set<string> tracking for seen brand names (case-insensitive) in importBrands()
-- [ ] T034 [US3] Update processRow() to check for duplicates and return duplicate_brand status
-- [ ] T035 [US3] Implement ImportSummary aggregation logic in reportGenerator.ts
-- [ ] T036 [US3] Create generateReport() function in reportGenerator.ts producing complete ImportReport
-- [ ] T037 [US3] Implement writeReportJSON() in reportGenerator.ts to save import-report.json
-- [ ] T038 [US3] Add detailed console summary output (total processed, successful, failed, error breakdown)
-- [ ] T039 [US3] Add validation for empty CSV rows in csvParser.ts with line number tracking
-- [ ] T040 [US3] Add validation for malformed CSV rows (not exactly 2 columns) in csvParser.ts
-- [ ] T041 [US3] Update import-brands.ts to call generateReport() and writeReportJSON()
-- [ ] T042 [US3] Add file size warning detection (>10MB) in fileValidator.ts
-- [ ] T043 [US3] Add warnings array to ImportResult for non-fatal issues
+- [x] T032 [P] [US3] Implement duplicate brand name detection in brandImporter.ts with isDuplicate() function
+- [x] T033 [P] [US3] Add Set<string> tracking for seen brand names (case-insensitive) in importBrands()
+- [x] T034 [US3] Update processRow() to check for duplicates and return duplicate_brand status
+- [x] T035 [US3] Implement ImportSummary aggregation logic in reportGenerator.ts
+- [x] T036 [US3] Create generateReport() function in reportGenerator.ts producing complete ImportReport
+- [x] T037 [US3] Implement writeReportJSON() in reportGenerator.ts to save import-report.json
+- [x] T038 [US3] Add detailed console summary output (total processed, successful, failed, error breakdown)
+- [x] T039 [US3] Add validation for empty CSV rows in csvParser.ts with line number tracking
+- [x] T040 [US3] Add validation for malformed CSV rows (not exactly 2 columns) in csvParser.ts
+- [x] T041 [US3] Update import-brands.ts to call generateReport() and writeReportJSON()
+- [x] T042 [US3] Add file size warning detection (>10MB) in fileValidator.ts
+- [x] T043 [US3] Add warnings array to ImportResult for non-fatal issues
 
 **Checkpoint**: All user stories should now be independently functional - imports provide complete visibility into results
 
@@ -122,19 +122,19 @@
 
 **Purpose**: Improvements that affect multiple user stories and finalization
 
-- [ ] T044 [P] Add TypeScript type checking for all importer modules (run tsc --noEmit)
-- [ ] T045 [P] Verify UTF-8 and ASCII encoding handling in csvParser.ts per FR-014
-- [ ] T046 [P] Verify brand name preservation (FR-015) - exact case, spacing, special characters
-- [ ] T047 [P] Add --verbose flag support in import-brands.ts CLI for detailed logging
-- [ ] T048 [P] Add --dry-run flag support in import-brands.ts CLI for validation without writing
-- [ ] T049 [P] Add error handling for Windows (CRLF) and Unix (LF) line endings in csvParser.ts
-- [ ] T050 [P] Update CLAUDE.md with import-brands command usage
-- [ ] T051 Create sample test data: test-brands.csv with 10 brands in public/test-data/
-- [ ] T052 Create sample test logos directory in public/test-data/Logos/ with mixed file types
-- [ ] T053 Run import-brands script with test data and verify output
-- [ ] T054 Validate quickstart.md instructions match implemented CLI interface
-- [ ] T055 Add JSDoc comments to all public functions in importer modules
-- [ ] T056 Performance validation: Test import of 1,000 brands completes in <60 seconds (SC-003)
+- [x] T044 [P] Add TypeScript type checking for all importer modules (run tsc --noEmit)
+- [x] T045 [P] Verify UTF-8 and ASCII encoding handling in csvParser.ts per FR-014
+- [x] T046 [P] Verify brand name preservation (FR-015) - exact case, spacing, special characters
+- [x] T047 [P] Add --verbose flag support in import-brands.ts CLI for detailed logging
+- [x] T048 [P] Add --dry-run flag support in import-brands.ts CLI for validation without writing
+- [x] T049 [P] Add error handling for Windows (CRLF) and Unix (LF) line endings in csvParser.ts
+- [x] T050 [P] Update CLAUDE.md with import-brands command usage
+- [x] T051 Create sample test data: test-brands.csv with 10 brands in public/test-data/
+- [x] T052 Create sample test logos directory in public/test-data/Logos/ with mixed file types
+- [x] T053 Run import-brands script with test data and verify output
+- [x] T054 Validate quickstart.md instructions match implemented CLI interface
+- [x] T055 Add JSDoc comments to all public functions in importer modules
+- [x] T056 Performance validation: Test import of 1,000 brands completes in <60 seconds (SC-003)
 
 ---
 
